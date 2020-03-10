@@ -43,7 +43,7 @@ gem 'simple_form'
 gem 'popper_js'
 gem 'tether-rails'
 gem 'aws-sdk-core', '~> 3.91'
-gem 'aws-sdk-s3', '~> 1.61', require: false
+gem 'aws-sdk-s3', '~> 1.61'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
