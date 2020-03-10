@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blogapp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=devise-width, initial-scale=1, maximum-scale=1">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="/" style="text-decoration: none">Blog App</a>
+      <form class="form-inline">
+
+        <% if user_signed_in? %>
+        <%= button_to "New Post", new_post_path, class: "btn btn-primary", :method => "get" %>
+          <%= link_to 'Log Out', destroy_user_session_path, class: "btn btn-outline-danger", method: :delete %>
+        <% else %>
+          <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-primary" %>
+          <div style="padding-left: 10px">
+            <%= link_to 'Join', new_user_registration_path, class: "btn btn-outline-success" %>
+          </div>
+        <% end %>
+
+      </form>
+    </nav>
+  </head>
+
+  <body>
+    <% if user_signed_in? %>
+    <!-- <div style="float: right; padding-top: 10px; padding-right: 10px"> -->
+      
+    <!-- </div> -->
+    <% end %>
+    <p class="notice" style="text-align: center;"><%= notice %></p>
+    <p class="alert" style="text-align: center;"><%= alert %></p>
+    <div class="container-fluid" style="text-align: center;">
+      <%= yield %>
+    </div>
+  </body>
+</html>

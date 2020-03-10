@@ -1,0 +1,19 @@
+<div class="transitions-enabled">
+  <% @posts.each do |post| %>
+     <div class="box">
+      <div class="panel panel-default">
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag("#{post.image}", class: "rounded") %><br/>
+        <% end %>
+          <div class="panel-body">
+            <blockquote><%= post.text %></blockquote><br/>
+            <div class="panel-footer">
+              By:
+              <strong><%= post.user.email if post.user %></strong>
+            </div>
+          </div>
+        </div>
+    </div>
+  <% end %>
+
+</div>
