@@ -1,19 +1,16 @@
 class PostController < ApplicationController
-  # before_action :user_authenticate!, only: [:show, :edit, :update, :]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :current_user, only: [:edit, :update, :destroy]
 
   def new
-    # title = params[:title]
-    # desc = params[:description]
-    # image = params[:image]
-    # @post = Post.new(title: title, text: desc, image: image)
     @post = Post.new
   end
 
   def show
     id = params[:id]
+    @comment = Comment.new
     @post = Post.find_by(id: id)
+    @comments = @post.comments.order("created_at DESC")
   end
 
   def index
@@ -22,19 +19,12 @@ class PostController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    # @post.user = current_user.id.to_s
-    # @post.save
-    # p "--------------------------"
-    # p current_user
-    # @post
-    # p "--------------------------"
-
+    
     if @post.save
       flash.now[:notice] = 'Message sent!'
       redirect_to post_path(@post)
     else
       flash.now[:alert] = 'Error while uploading image!'
-      # redirect_to new_post_path
     end
     
   end

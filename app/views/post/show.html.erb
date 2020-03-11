@@ -7,19 +7,33 @@
 	        <%= image_tag("#{@post.image(:large)}", class: "rounded") %><br/>
 		</div>
        	<div>
-       		<blockquote class="blockquote text-center"  style="margin: 20px">
+       		<blockquote class="blockquote text-center"  style="margin: 20px; padding-bottom: 10px">
 			  <p class="mb-0 "><%=@post.text %></p>
-			  <footer class="blockquote-footer">By: <cite title="Source Title"><%= @post.user.email if @post.user %></cite></footer>
-			</blockquote>
-				<hr>
-	       	<span style="float: right;">
+			  <footer class="blockquote-footer">By: <cite title="Source Title"><%= @post.user.username if @post.user %></cite></footer>
+	       	<span style="float: left; padding-bottom: 10px">
+				<%= link_to "Back", root_path %>
+			</span>
+			<span style="float: right">
 				<% if user_signed_in? && current_user.id == @post.user_id %>
 					<%= link_to "Edit", edit_post_path %>
 					<%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
 	    		<% end %>
-				<%= link_to "Back", root_path %>
 	        </span>
+			</blockquote>
         </div>
+        <hr>
+		<div class="row" style="justify-content: center;">
+			<%= form_with model: [@post, @comment], local: true do |f| %>
+				<%= f.text_field :body %>
+				<%= f.submit "comment" %>
+			<% end %>
+
+			<% @comments.each do |comment| %>
+				[<%= comment.created_at.strftime("%I:%M %p") %>] <%= comment.user.username %>: <%= comment.body %>
+				<br> 
+
+			<% end %>
+		</div>
 	</div>
         <!-- <hr> -->
 <% end %>
