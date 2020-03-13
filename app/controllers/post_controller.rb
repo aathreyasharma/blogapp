@@ -19,6 +19,7 @@ class PostController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    # @post.image.attach(params[:image])
     
     if @post.save
       flash.now[:notice] = 'Message sent!'

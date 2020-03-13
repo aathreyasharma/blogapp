@@ -4,7 +4,7 @@
 			<%= @post.title %>
 		</div>
 		<div style="padding: 20px">
-	        <%= image_tag("#{@post.image(:large)}", class: "rounded") %><br/>
+	        <%= image_tag("#{@post.image.url(:large)}", class: "rounded") %><br/>
 		</div>
        	<div>
        		<blockquote class="blockquote text-center"  style="margin: 20px; padding-bottom: 10px">
@@ -16,23 +16,35 @@
 			<span style="float: right">
 				<% if user_signed_in? && current_user.id == @post.user_id %>
 					<%= link_to "Edit", edit_post_path %>
-					<%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+					<%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' }, style: "padding-left: 20px" %>
 	    		<% end %>
 	        </span>
 			</blockquote>
         </div>
         <hr>
-		<div class="row" style="justify-content: center;">
-			<%= form_with model: [@post, @comment], local: true do |f| %>
-				<%= f.text_field :body %>
-				<%= f.submit "comment" %>
-			<% end %>
-
-			<% @comments.each do |comment| %>
-				[<%= comment.created_at.strftime("%I:%M %p") %>] <%= comment.user.username %>: <%= comment.body %>
-				<br> 
-
-			<% end %>
+		<div class="row" style="padding: auto; max-width: 50%">
+			<div class="col">
+				<%= form_with model: [@post, @comment], local: true do |f| %>
+					<div class="form-group">
+						<%= f.text_area :body, class: 'form-control', rows: "2", cols: "100", style: "border: none; border-bottom: 1px solid black", placeholder: "Say something appreciative...." %>
+					</div>
+					<div style="float: right">
+						<%= f.submit "comment", class: "btn btn-primary" %>
+					</div>
+				<% end %>				
+			</div>
+		</div>
+		<div class="row" style="padding-top: 20px">
+			<div class=col style="padding: auto">
+				<% @comments.each do |comment| %>
+					<div style="background: #ffffff; max-width: 50%; margin-bottom: 10px; padding: 10px; border-radius: 20px; box-shadow: 0px 0px 10px ;">
+						<blockquote class="blockquote">
+						  <p class="mb-0 text-left" style="padding-left: 20px"><%= comment.body %></p>
+						  <footer class="blockquote-footer text-right"><strong><%= comment.user.username.capitalize %></strong>   <small><%= comment.created_at.strftime("%I:%M %p") %></small></footer>
+						</blockquote>				
+					</div>
+				<% end %>
+			</div>
 		</div>
 	</div>
         <!-- <hr> -->
