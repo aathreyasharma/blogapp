@@ -4,7 +4,7 @@
 			<%= @post.title %>
 		</div>
 		<div style="padding: 20px">
-	        <%= image_tag("#{@post.image.url(:large)}", class: "rounded") %><br/>
+	        <%= image_tag("#{@post.image.url(:large)}", class: "rounded", style: "max-width: 100%;") %><br/>
 		</div>
        	<div>
        		<blockquote class="blockquote text-center"  style="margin: 20px; padding-bottom: 10px">
