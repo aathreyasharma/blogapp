@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Blogapp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=devise-width, initial-scale=1, maximum-scale=1">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="/" style="text-decoration: none">Blog App</a>
-      <form class="form-inline">
-
-        <% if user_signed_in? %>
-          <div style="padding-left: 10px">
-          <%= link_to "New Post", new_post_path, class: "btn btn-primary", :method => "get" %>
-          </div>
-          <div style="padding-left: 10px">
-            <%= link_to 'Log Out', destroy_user_session_path, class: "btn btn-outline-danger", method: :delete %>
-          </div>
-        
-        <% else %>
-        
-          <div style="padding-left: 10px">
-            <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-primary" %>
-          </div>
-        
-          <div style="padding-left: 10px">
-            <%= link_to 'Join', new_user_registration_path, class: "btn btn-outline-success" %>
-          </div>
-        
-        <% end %>
-
-      </form>
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <a class="navbar-brand" style="padding: 10px" href="/" style="text-decoration: none">Blog App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <% if user_signed_in? %>
+                <div style="padding: 10px;">
+                    <%= link_to "New Post", new_post_path, class: "btn btn-primary", :method => "get" %>
+                </div>
+                <div style="padding: 10px;">
+                    <%= link_to 'Log Out', destroy_user_session_path, class: "btn btn-outline-danger", method: :delete %>
+                </div>
+            <% else %>
+                <div style="padding: 10px"> 
+                    <%= link_to 'Login', new_user_session_path, class: "btn btn-outline-primary", :method => 'post' %>
+                </div>
+                <div style="padding: 10px">
+                    <%= link_to 'Join', new_user_registration_path, class: "btn btn-outline-success", :method => 'post' %>
+                </div>
+            <% end %>
+        </div>
     </nav>
-  </head>
+</head>
 
-  <body>
-    <% if user_signed_in? %>
-    <!-- <div style="float: right; padding-top: 10px; padding-right: 10px"> -->
-      
+<body>
+  <% if user_signed_in? %>
+  <!-- <div style="float: right; padding-top: 10px; padding-right: 10px"> -->
+
     <!-- </div> -->
     <% end %>
     <p class="notice" style="text-align: center;"><%= notice %></p>
     <p class="alert" style="text-align: center;"><%= alert %></p>
     <div class="container-fluid" style="text-align: center;">
       <%= yield %>
-    </div>
-  </body>
+  </div>
+</body>
 </html>
