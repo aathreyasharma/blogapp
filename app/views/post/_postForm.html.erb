@@ -1,0 +1,24 @@
+<%= form_for @post,  url: { action: @actionType }, html: { multipart: true }  do |f| %>
+ 	<div class="form-group">
+		<%= f.label "Title", style: "float: left" %>
+		<%= f.text_field :title, class: 'form-control'  %>
+ 	</div>
+	<div class="form-group">
+		<%= f.label "Description", style: "float: left" %>
+		<%= f.text_area :text, class: 'form-control', rows: "10"  %>
+	</div>
+	<div class="form-group">
+		<%= f.label "Image", style: "float: left" %>
+		<%= f.file_field :image, class: 'form-control-file', style: "width: 100%"  %>
+	</div>
+	<% if @action == 'update' %>
+	<div class="form-group" style="float: left; padding-right: 20px; padding-top: 20px">
+		<%= button_to "Back", post_path(@post), class: 'btn btn-secondary' %>
+	</div>
+	<% end %>
+	<div class="form-group" style="float: left; padding-top: 20px">
+		<%= f.submit @actionType.capitalize, class: 'btn btn-primary' %>
+	</div>
+<% end %>
+
+

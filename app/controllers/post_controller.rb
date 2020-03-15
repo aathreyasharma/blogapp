@@ -4,6 +4,8 @@ class PostController < ApplicationController
 
   def new
     @post = Post.new
+    @header = "Pour it!"
+    @actionType = "create"
   end
 
   def show
@@ -40,6 +42,8 @@ class PostController < ApplicationController
 
   def edit
     id = params[:id]
+    @actionType = "update"
+    @header = "Make it Better!"
     @post = Post.find_by(id: id)
   end
 
