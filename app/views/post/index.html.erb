@@ -10,11 +10,10 @@
               <%= image_tag("#{post.image(:medium)}", class: "rounded  mx-auto") %><br/>
             <% end %>  
           </div>
-          
-          <div class="col" style="vertical-align: middle; margin: auto;">
+          <div class="col lead" style="vertical-align: middle; margin: auto;">
               <p style="padding: auto"><%= truncate(post.text, :length => 100, :omission => "...") { link_to 'Read More', post_path(post.id) } %></p>
+              <footer class="blockquote-footer text-centre">By: <cite title="Source Title"><%= post.user.username if post.user %></cite></footer>
           </div>
-
         </div>
       </div>
       <% if idx < @posts.length-1 %>

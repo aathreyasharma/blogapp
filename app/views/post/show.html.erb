@@ -8,7 +8,7 @@
 		</div>
        	<div>
        		<blockquote class="blockquote text-center"  style="margin: 20px; padding-bottom: 10px">
-			  <p class="mb-0 "><%=@post.text %></p>
+			  <p class="mb-0 lead"><%=@post.text %></p>
 			  <footer class="blockquote-footer">By: <cite title="Source Title"><%= @post.user.username if @post.user %></cite></footer>
 	       	<span style="float: left; padding-bottom: 10px">
 				<%= link_to "Back", root_path %>
