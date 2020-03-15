@@ -11,8 +11,8 @@
             <% end %>  
           </div>
           
-          <div class="col" style="padding: 5%; text-align: center; float: left;">
-            <p class="lead" style=" word-wrap: break-word;"><%= post.text %></p>
+          <div class="col" style="vertical-align: middle; margin: auto;">
+              <p style="padding: auto"><%= truncate(post.text, :length => 100, :omission => "...") { link_to 'Read More', post_path(post.id) } %></p>
           </div>
 
         </div>
